@@ -1,3 +1,5 @@
+!pip install opencv-python
+!pip install webrtc_streamer
 import streamlit as st
 import numpy as np
 from webrtc_streamer import webrtc_streamer
