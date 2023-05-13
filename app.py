@@ -1,10 +1,9 @@
 import streamlit as st
-import cv2
 import numpy as np
 from webrtc_streamer import webrtc_streamer
 
 # Load the pre-trained model
-model = cv2.dnn.readNet("yolov3.weights", "yolov3.cfg")
+model = np.load("yolov3.weights")
 
 # Create a webrtc streamer object
 streamer = webrtc_streamer()
