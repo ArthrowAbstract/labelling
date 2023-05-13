@@ -1,23 +1,38 @@
 import streamlit as st
-import cv2 from opencv-python
+import cv2
 import numpy as np
+from webrtc_streamer import webrtc_streamer
 
 # Load the pre-trained model
 model = cv2.dnn.readNet("yolov3.weights", "yolov3.cfg")
 
-# Create a video capture object
-cap = cv2.VideoCapture(0)
+# Create a webrtc streamer object
+streamer = webrtc_streamer()
 
 # Create a text box to display the class labels
 st.text("Class labels:")
 
 # Create a list to store the class labels
-class_labels = []
+class_labels = [
+    "person",
+    "car",
+    "dog",
+    "cat",
+    "bike",
+    "bus",
+    "truck",
+    "motorcycle",
+    "airplane",
+    "train",
+]
+
+# Start the webrtc streamer
+streamer.start()
 
 # Loop over the frames in the video
 while True:
-    # Capture the current frame
-    ret, frame = cap.read()
+    # Get the next frame from the webrtc streamer
+    frame = streamer.get_frame()
 
     # Convert the frame to a NumPy array
     frame_np = np.array(frame)
@@ -54,5 +69,5 @@ while True:
     if st.button("Quit"):
         break
 
-# Release the video capture object
-cap.release()
+# Stop the webrtc streamer
+streamer.stop()
