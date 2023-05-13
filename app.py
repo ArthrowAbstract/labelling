@@ -1,6 +1,5 @@
 import streamlit as st
-import opencv-python
-import cv2
+import cv2 from opencv-python
 import numpy as np
 
 # Load the pre-trained model
